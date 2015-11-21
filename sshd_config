@@ -1,0 +1,13 @@
+PermitRootLogin                 no
+RSAAuthentication               yes
+PubkeyAuthentication            yes
+AuthorizedKeysFile              authorized_keys
+PasswordAuthentication          no
+ChallengeResponseAuthentication yes
+UsePAM                          yes
+UseDNS                          yes
+AllowAgentForwarding            yes
+AllowTcpForwarding              yes
+PrintMotd                       yes
+UsePrivilegeSeparation          sandbox
+AuthenticationMethods           keyboard-interactive:pam,publickey

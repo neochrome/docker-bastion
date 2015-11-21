@@ -1,0 +1,2 @@
+auth required pam_google_authenticator.so nullok
+auth required pam_env.so
