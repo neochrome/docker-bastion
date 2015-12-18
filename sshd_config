@@ -10,4 +10,4 @@ AllowAgentForwarding            yes
 AllowTcpForwarding              yes
 PrintMotd                       yes
 UsePrivilegeSeparation          sandbox
-AuthenticationMethods           keyboard-interactive:pam,publickey
+AuthenticationMethods           publickey,keyboard-interactive:pam
