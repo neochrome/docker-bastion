@@ -1,0 +1,2 @@
+# use latest or one of the published tags as your base
+FROM neochrome/bastion:latest

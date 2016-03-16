@@ -8,6 +8,7 @@ to `/bastion`. I.e, one must connect as the `bastion` user like so:
 ```
 $ ssh bastion@hostname
 ```
+Please see [Dockerfile.example](Dockerfile.example) for a minimal example of this.
 
 ### google-authenticator
 Upon first connection `google-authenticator` will be run in order to
