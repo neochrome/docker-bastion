@@ -22,11 +22,11 @@ RUN apk --update add \
 	&& apk del \
 		build-base automake autoconf libtool curl tar linux-pam-dev \
 	&& rm -rf /var/cache/apk/* \
-	&& rm -rf /etc/ssh/ssh_host_*_key*
+	&& rm -rf /etc/ssh/ssh_host_*_key* \
+	&& rm -f /etc/motd
 
 COPY ./sshd_config /etc/ssh/
 COPY ./sshd.pam /etc/pam.d/sshd
-RUN rm -f /etc/motd
 
 RUN adduser -D -G users -s /bin/sh -h /bastion bastion \
 	&& passwd -u bastion
