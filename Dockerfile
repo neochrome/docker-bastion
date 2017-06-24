@@ -40,11 +40,10 @@ COPY ./sshd_config /etc/ssh/
 COPY ./sshd.pam /etc/pam.d/sshd
 RUN rm -f /etc/motd
 
-ONBUILD RUN ssh-keygen -A
-
 RUN adduser -D -G users -s /bin/sh -h /bastion bastion \
 	&& passwd -u bastion
 RUN echo '[[ -e .google_authenticator ]] || google-authenticator' >> /etc/profile
 
 EXPOSE 22
-CMD /usr/sbin/sshd -De
+VOLUME /etc/ssh /bastion
+CMD ssh-keygen -A && /usr/sbin/sshd -De

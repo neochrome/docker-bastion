@@ -1,28 +1,35 @@
 # Bastion with google authenticator
+A simple ssh bastion using public keys and google authenticator to keep thing safe.
 
 ## Usage
-Derive an image from this one in order to have host keys generated and
-stored within the resulting image.
-The image contains only one user, named `bastion` with it's home set
-to `/bastion`. I.e, one must connect as the `bastion` user like so:
+Since host keys are generated on demand upon launch, you might want to
+store them in a separate data container. For this purpose the VOLUME
+`/etc/ssh` is defined and may used like:
+```
+$ docker create --name bastion-data neochrome/bastion:latest
+$ docker run --volumes-from bastion-data -p 2222:22 neochrome/bastion:latest
+```
+
+The user `bastion` is used for connection:
 ```
 $ ssh bastion@hostname
 ```
-Please see [Dockerfile.example](Dockerfile.example) for a minimal example of this.
 
 ### google-authenticator
 Upon first connection `google-authenticator` will be run in order to
 setup two-factor authentication.
 
 If you have previous settings or want to share the generated ones
-between multiple bastions, please use VOLUMEs to share the `/bastion` folder
-or specifically `/bastion/.google-authenticator`.
+between multiple bastions or for safe-keep when upgrading, please use
+a data container as shown above.
 
 ### authorized_keys
-Either add `COPY authorized_keys /bastion/authorized_keys` to your `Dockerfile`
-or use VOLUMEs to share such a file.
-If you add the file to your image, remember to set owner to `bastion:users`.
+In order to authenticate public keys need to be made available to the
+bastion. This may be done in a derived image by adding the key(s) to
+`/bastion/authorized_keys`, don't forget to set owner to `bastion:users`.
+Another way is to use another defined VOLUME, `/bastion` and create a
+data container as shown above.
 
 ### motd
-The image comes without a `/etc/motd` file. If you want one, you may add a
-`COPY my_motd /etc/motd` command to your `Dockerfile`.
+The image comes without a `/etc/motd` file. If you want one, you may either
+mount one or add one to a derived image.
