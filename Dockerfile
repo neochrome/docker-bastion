@@ -1,14 +1,16 @@
 # vim: ft=dockerfile
-FROM alpine:3.1
-MAINTAINER Johan Stenqvist <johan@stenqvist.net>
-LABEL Description="Bastion with google authenticator"
+FROM alpine:edge
+ARG GA_VERSION=1.02
+LABEL \
+	description="Bastion with google authenticator" \
+	maintainer="johan@stenqvist.net" \
+	google.authenticator.version=$GA_VERSION
 
 RUN apk --update add \
-		build-base automake autoconf libtool curl tar \
-		linux-pam linux-pam-dev \
-		libssl1.0 openssl-dev \
+		openssh-server-pam linux-pam \
+		build-base automake autoconf libtool curl tar linux-pam-dev \
 	&& mkdir -p /src/ga \
-		&& curl -L https://github.com/google/google-authenticator/tarball/f2db05c52884e4d6c3894f5fd2cf10f0f686aec2 \
+		&& curl -L https://github.com/google/google-authenticator/tarball/${GA_VERSION} \
 		| tar -xzvf - -C /src/ga --strip-components 1 \
 		&& (cd /src/ga/libpam \
 			&& ./bootstrap.sh \
@@ -16,25 +18,11 @@ RUN apk --update add \
 				--prefix=/ \
 			&& make \
 			&& make install) \
-	&& mkdir -p /src/sshd \
-		&& curl -L https://github.com/openssh/openssh-portable/tarball/V_7_1_P1 \
-		| tar -xzvf - -C /src/sshd --strip-components 1 \
-		&& (cd /src/sshd \
-			&& autoreconf \
-			&& ./configure \
-				--prefix=/usr \
-				--sysconfdir=/etc/ssh \
-				--with-pam \
-			&& make \
-			&& make install) \
-		&& rm -rf /etc/ssh/ssh_host_*_key* \
-		&& rm -f /usr/bin/ssh-agent \
-		&& rm -f /usr/bin/ssh-keyscan \
 	&& rm -rf /src \
-	&& apk del build-base automake autoconf libtool curl tar \
-		linux-pam-dev \
-		openssl-dev \
-	&& rm -rf /var/cache/apk/*
+	&& apk del \
+		build-base automake autoconf libtool curl tar linux-pam-dev \
+	&& rm -rf /var/cache/apk/* \
+	&& rm -rf /etc/ssh/ssh_host_*_key*
 
 COPY ./sshd_config /etc/ssh/
 COPY ./sshd.pam /etc/pam.d/sshd
