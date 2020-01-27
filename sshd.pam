@@ -1,2 +1,2 @@
-auth required pam_google_authenticator.so nullok
-auth required pam_env.so
+auth required pam_google_authenticator.so echo_verification_code nullok
+auth required pam_permit.so
