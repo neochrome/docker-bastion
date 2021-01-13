@@ -4,9 +4,9 @@ A simple ssh bastion using public keys and
 to keep things safe.
 
 ## Usage
-Since host keys are generated on demand upon launch, you might want to
-store them in a separate data container. For this purpose the VOLUME
-`/etc/ssh` is defined and may used like:
+SSH host keys will be generated on demand upon launch. You might want to
+store them in a separate data container to have them persist when upgrading
+or similar. For this purpose the volume `/etc/ssh` is defined and may used like:
 
 ```
 $ docker volume create bastion-keys
@@ -19,20 +19,22 @@ $ ssh bastion@hostname
 ```
 
 ### google-authenticator
-Upon first connection `google-authenticator` will be run in order to
-setup two-factor authentication.
+When connecting to the bastion, `google-authenticator` will be run in order to
+setup two-factor authentication unless existing settings are present.
 
-If you have previous settings or want to share the generated ones
-between multiple bastions or for safe-keep when upgrading, use
-a volume like this:
-
+If you want to share the generated authentication settings between multiple
+bastions or have them persisted when upgrading or similar, use a volume like this:
 ```
 $ docker volume create bastion-ga
 $ docker run -v "bastion-ga:/bastion" -p 2222:22 neochrome/bastion:latest
 ```
 
-You may also use a data container to handle both volumes together. E.g:
+If you have existing authentication settings that you want to use, you may
+mount those as `/.google_authenticator` and they will be copied in place
+upon launch.
 
+You may also use a data container to handle both volumes (`/etc/ssh` and `/bastion`)
+together. E.g:
 ```
 $ docker create --name bastion-data neochrome/bastion:latest
 $ docker run --volumes-from bastion-data -p 2222:22 neochrome/bastion:latest
