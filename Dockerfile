@@ -21,8 +21,6 @@ RUN rm -f \
 	/etc/motd \
 	/etc/pam.d/google-authenticator
 
-ARG VERSION
-LABEL version="$VERSION"
 COPY ./sshd_config /etc/ssh/
 COPY ./sshd.pam /etc/pam.d/sshd
 COPY ./start.sh /

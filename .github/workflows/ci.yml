@@ -62,5 +62,5 @@ jobs:
             linux/arm/v6
           push: ${{ !env.ACT && github.event_name != 'pull_request' }}
           tags: ${{ steps.build-args.outputs.tags }}
-          build-args: |
-            VERSION=${{ steps.build-args.outputs.version }}
+          labels: |
+            version=${{ steps.build-args.outputs.version }}
