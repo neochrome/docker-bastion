@@ -1,6 +1,3 @@
-ARG GA_VERSION=1.08-r0
-
-
 FROM alpine:3.13.2
 ENV LOG_LEVEL=INFO
 
@@ -16,15 +13,13 @@ RUN \
 	&& passwd -u bastion
 RUN echo '[[ -e .google_authenticator ]] || google-authenticator' >> /etc/profile
 
-ARG GA_VERSION
 RUN apk add \
-	"google-authenticator=$GA_VERSION" \
+	google-authenticator \
 	openssh-server-pam
 RUN rm -f \
 	/etc/ssh/ssh_host_*_key* \
 	/etc/motd \
 	/etc/pam.d/google-authenticator
-LABEL com.google.authenticator.version="$GA_VERSION"
 
 ARG VERSION
 LABEL version="$VERSION"
