@@ -37,6 +37,7 @@ jobs:
           fi
           echo "::set-output name=version::${VERSION}"
           echo "::set-output name=tags::${TAGS}"
+          echo "::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -64,3 +65,12 @@ jobs:
           tags: ${{ steps.build-args.outputs.tags }}
           labels: |
             version=${{ steps.build-args.outputs.version }}
+            org.opencontainers.image.version=${{ steps.build-args.outputs.version }}
+            org.opencontainers.image.created=${{ steps.prep.outputs.created }}
+            org.opencontainers.image.title=${{ github.event.repository.name }}
+            org.opencontainers.image.description=${{ github.event.repository.description }}
+            org.opencontainers.image.url=${{ github.event.repository.html_url }}
+            org.opencontainers.image.source=${{ github.event.repository.clone_url }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
+
