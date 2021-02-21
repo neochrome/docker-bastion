@@ -1,7 +1,7 @@
 ARG GA_VERSION=1.08-r0
 
 
-FROM alpine:3.11.3
+FROM alpine:3.13.2
 ENV LOG_LEVEL=INFO
 
 LABEL \
