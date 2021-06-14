@@ -15,7 +15,8 @@ RUN echo '[[ -e .google_authenticator ]] || google-authenticator' >> /etc/profil
 
 RUN apk add \
 	google-authenticator \
-	openssh-server-pam
+	openssh-server-pam \
+	openssh-client
 RUN rm -f \
 	/etc/ssh/ssh_host_*_key* \
 	/etc/motd \
