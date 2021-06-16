@@ -7,9 +7,17 @@ services:
       context: "."
       args:
         VERSION: "test"
-    ports:
-      - "8888:22"
     volumes:
-      - "$HOME/.ssh/id_rsa.pub:/authorized_keys"
+      - "$PWD/test/ida_rsa.pub:/authorized_keys"
+      - "$PWD/test/google_authenticator:/.google_authenticator"
     environment:
       LOG_LEVEL: "DEBUG"
+
+  test:
+    build: "./test"
+    volumes:
+      - "$PWD/test/ida_rsa:/root/.ssh/id_rsa"
+      - "$PWD/test/google_authenticator_code:/code"
+    command: "sshpass -P 'Verification code:' -f /code ssh bastion@bastion -o StrictHostKeyChecking=no -- exit"
+    depends_on:
+      - "bastion"
