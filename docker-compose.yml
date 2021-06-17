@@ -18,6 +18,5 @@ services:
     volumes:
       - "$PWD/test/ida_rsa:/root/.ssh/id_rsa"
       - "$PWD/test/google_authenticator_code:/code"
-    command: "sshpass -P 'Verification code:' -f /code ssh bastion@bastion -o StrictHostKeyChecking=no -- exit"
     depends_on:
       - "bastion"
