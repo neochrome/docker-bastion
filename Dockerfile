@@ -15,15 +15,15 @@ RUN echo '[[ -e .google_authenticator ]] || google-authenticator' >> /etc/profil
 
 RUN apk add \
 	google-authenticator \
-	openssh-server-pam \
-	openssh-client
+	openssh-client \
+	openssh-server-pam
 RUN rm -f \
 	/etc/ssh/ssh_host_*_key* \
 	/etc/motd \
 	/etc/pam.d/google-authenticator
 
 COPY ./sshd_config /etc/ssh/
-COPY ./sshd.pam /etc/pam.d/sshd
+COPY ./sshd.pam /etc/pam.d/
 COPY ./start.sh /
 
 VOLUME /etc/ssh /bastion

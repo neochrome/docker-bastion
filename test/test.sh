@@ -5,4 +5,5 @@ sshpass \
 	-f ./code \
 	ssh bastion@bastion \
 	-o StrictHostKeyChecking=no \
+	-vv \
 	-- exit

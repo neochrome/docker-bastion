@@ -10,4 +10,4 @@
 	&& chmod 0400 /bastion/.google_authenticator
 	
 ssh-keygen -A \
-&& exec /usr/sbin/sshd -De -o LogLevel=$LOG_LEVEL
+	&& exec /usr/sbin/sshd.pam -De -o LogLevel=$LOG_LEVEL
