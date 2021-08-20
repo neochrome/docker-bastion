@@ -2,7 +2,7 @@ AllowAgentForwarding            yes
 AllowTcpForwarding              yes
 AuthenticationMethods           publickey,keyboard-interactive:pam
 AuthorizedKeysFile              authorized_keys
-ChallengeResponseAuthentication yes
+KbdInteractiveAuthentication    yes
 PasswordAuthentication          no
 PermitRootLogin                 no
 PrintMotd                       yes
