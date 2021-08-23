@@ -32,7 +32,7 @@ jobs:
             TAGS="${TAGS},${REPO}:${MAJOR}"
             TAGS="${TAGS},${REPO}:${MAJOR}.${MINOR}"
             TAGS="${TAGS},${REPO}:${MAJOR}.${MINOR}.${PATCH}"
-          elif
+          else
             TAGS="${REPO}:${VERSION}"
           fi
           echo "::set-output name=version::${VERSION}"
