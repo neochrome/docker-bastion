@@ -1,4 +1,4 @@
-FROM alpine:3.14.1
+FROM alpine:3.16.2
 ENV LOG_LEVEL=INFO
 
 LABEL \
