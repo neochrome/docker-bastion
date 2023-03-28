@@ -57,3 +57,15 @@ The image comes without a `/etc/motd` file. If you want one, you may either:
 1. Add one to a derived image.
 2. Mount one at `/motd` and then the container will copy it in place upon launch.
 3. Mount one at `/etc/motd`.
+
+
+## Contributing
+1. Fork it (<https://github.com/neochrome/docker-bastion/fork>)
+2. Create your feature branch (`git switch -c my-new-feature`)
+3. Commit your changes (`git commit -am 'feat: some new feature'`),
+   make sure to use <https://www.conventionalcommits.org/>.
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
+
+## Releasing
+Releases are automated using [Release Please](https://github.com/apps/release-please).

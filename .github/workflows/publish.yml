@@ -3,19 +3,16 @@ name: publish
 on:
   release:
     types:
-      - released
+      - published
+
+
+permissions:
+  contents: write
+
 
 jobs:
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3.5.0
-
-      - name: Test
-        run: make test
-
-  build-docker-images:
+  build-and-publish:
     runs-on: ubuntu-latest
     env:
       REPO: neochrome/bastion
@@ -25,7 +22,7 @@ jobs:
       - name: Build args
         id: build-args
         run: |
-          VERSION="${GITHUB_REF#refs/tags/}"
+          VERSION="$(cat version.txt)"
           if [[ $VERSION =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
             MAJOR="${BASH_REMATCH[1]}"
             MINOR="${BASH_REMATCH[2]}"
