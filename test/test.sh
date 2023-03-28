@@ -1,5 +1,9 @@
 #!/bin/sh
-ping -c 1 -w 5 bastion
+for i in $(seq 1 10); do
+	echo bastion connection attempt [$i/10]
+	nc -zvw5 bastion 22 && break
+	sleep 1
+done
 sshpass \
 	-P 'Verification code:' \
 	-f ./code \
