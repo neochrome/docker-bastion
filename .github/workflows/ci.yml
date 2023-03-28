@@ -8,6 +8,8 @@ on:
       - '*'
   pull_request_target:
 
+concurrency: ci-${{ github.ref }}
+
 jobs:
 
   test:
