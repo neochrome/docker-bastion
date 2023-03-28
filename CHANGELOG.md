@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [1.5.0](https://github.com/neochrome/docker-bastion/compare/1.4.3...v1.5.0) (2023-03-28)
+
+
+### Miscellaneous Chores
+
+* release 1.5.0 ([ac7661d](https://github.com/neochrome/docker-bastion/commit/ac7661dc3d9478c6480724d7b62d846df2794123))
+
 ## [1.4.3](https://github.com/neochrome/docker-bastion/compare/1.4.2...1.4.3) (2022-11-07)
 
 
