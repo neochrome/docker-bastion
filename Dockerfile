@@ -23,7 +23,7 @@ RUN rm -f \
 	/etc/pam.d/google-authenticator
 
 COPY ./sshd_config /etc/ssh/
-COPY ./sshd.pam /etc/pam.d/
+COPY ./sshd.pam /etc/pam.d/sshd
 COPY ./start.sh /
 
 VOLUME /etc/ssh /bastion

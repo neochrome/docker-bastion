@@ -1,2 +1,3 @@
+#%PAM-1.0
 auth required pam_google_authenticator.so echo_verification_code nullok
 auth required pam_permit.so
