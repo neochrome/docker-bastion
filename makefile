@@ -1,4 +1,5 @@
 .PHONY: test
 	
 test:
-	docker compose run --build test
+	docker compose down
+	docker compose run test

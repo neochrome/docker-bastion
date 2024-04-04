@@ -1,5 +1,3 @@
-version: "3.5"
-
 services:
 
   bastion:
@@ -8,15 +6,17 @@ services:
       args:
         VERSION: "test"
     volumes:
-      - "$PWD/test/ida_rsa.pub:/authorized_keys"
-      - "$PWD/test/google_authenticator:/.google_authenticator"
+      - "./test/ida_rsa.pub:/authorized_keys"
+      - "./test/google_authenticator:/.google_authenticator"
     environment:
       LOG_LEVEL: "DEBUG"
 
   test:
     build: "./test"
     volumes:
-      - "$PWD/test/ida_rsa:/root/.ssh/id_rsa"
-      - "$PWD/test/google_authenticator_code:/code"
+      - "./test/ida_rsa:/root/.ssh/id_rsa"
+      - "./test/google_authenticator_code:/code"
+      - "./test/test.sh:/test.sh"
+    command: "/test.sh"
     depends_on:
       - "bastion"
