@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [1.5.6](https://github.com/neochrome/docker-bastion/compare/v1.5.5...v1.5.6) (2024-04-04)
+
+
+### Bug Fixes
+
+* update sshd config with pam to work again ([1c51223](https://github.com/neochrome/docker-bastion/commit/1c512239e909dbb3be0edbf3842b0f0f31323adf))
+
 ## [1.5.5](https://github.com/neochrome/docker-bastion/compare/v1.5.4...v1.5.5) (2024-03-13)
 
 
