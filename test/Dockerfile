@@ -1,4 +1,4 @@
-FROM alpine:3.14.0
+FROM alpine:3.19.1
 
 RUN apk add \
 	openssh-client \
