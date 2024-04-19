@@ -18,7 +18,7 @@ jobs:
       REPO: neochrome/bastion
 
     steps:
-      - uses: actions/checkout@v4.1.2
+      - uses: actions/checkout@v4.1.3
 
       - name: Build args
         id: build-args
