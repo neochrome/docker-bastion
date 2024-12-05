@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [1.5.8](https://github.com/neochrome/docker-bastion/compare/v1.5.7...v1.5.8) (2024-12-05)
+
+
+### Bug Fixes
+
+* **deps:** bump alpine from 3.20.3 to 3.21.0 ([5a53886](https://github.com/neochrome/docker-bastion/commit/5a5388623a6954f4bac49aa2da817b7351c5e6ff))
+
 ## [1.5.7](https://github.com/neochrome/docker-bastion/compare/v1.5.6...v1.5.7) (2024-09-19)
 
 
